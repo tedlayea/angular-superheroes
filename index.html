@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='superherosApp'>
 <head>
   <meta charset="UTF-8">
   <title>Superhero Phone Book</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body ng-controller='SuperherosController as vm'>
+  <h1>Here are my superheros!!!</h1>
+  <div ng-repeat="superheros in vm.superheross">
+    <details>
+      <summary>
+        {{$index + 1}} {{superheros.name}} ({{superheros.comicsAffiliation}})
+      </summary>
+      <img src="{{superheros.imageURL}}"> <p> Mobile: {{superheros.phoneNumber}}</p>
+    </details>
+      <!-- <button ng-click ="vm.detailSuperheros()"> Detail</button> -->
+  </div>
+  <div >
+    <p>Enter here to seach your superhero:</p> <input type="text" ng-model="vm.newSuperheros">
+    <p>Did you looking for: {{vm.newSuperheros}} </p> <button ng-click ="vm.searchSuperheros()"> Search </button>
+    <div ng-repeat="superheros in vm.superheross | filter: {name: keyword}">
+      <p>{{$index + 1}}. {{superheros.name}} </p>
+    </div>
 
-  <script src="app.js"></script>
+  </div>
 </body>
 </html>
